@@ -11,16 +11,17 @@ class LineSearch:
     def LineCraw(self):
         url = f"https://www.linetv.tw/search?action_value={self.search}&q={self.search}&source=SEARCH_BAR"
         self.driver.get(url)
-        time.sleep(1)
+        time.sleep(0.3)
         all_name = self.driver.find_elements(By.TAG_NAME,"a")
+        time.sleep(0.3)
         for name in all_name:
             title = name.text
             if self.search in title:
                 href = name.get_attribute("href")
-                if href not in self.finallst.values():
+                if title not in self.finallst.keys():
                     self.finallst[title.split('\n')[-1]] = href
         #print(self.finallst)
-        self.driver.close()
+        #self.driver.close()
         return dict(sorted(self.finallst.items()))
 
 
