@@ -1,17 +1,14 @@
-from crawl import AnimeCraw
-
+from webcrawl.crawling import Crawl
 
 
 if __name__ == '__main__':
-    target = input()
-    kubo , myself ,friday,anigamer,kktv , linetv,grimy = AnimeCraw(target)
-    print(kubo)
-    print(myself)
-    print(friday)
-    print(anigamer)
-    print(kktv)
-    print(linetv)
-    print(grimy)
-    #傳送tkinter介面
-    #如何篩選結果->找出宣傳片,詳細資料
+    #target = input()
+    c = Crawl('刀劍神域')
+    choose_lst = c.Outputchoose()
+    actualchoose = '刀劍神域 Sword Art Online'
+    information = c.platform(actualchoose)
+    platform_ = c.result_dict
+    print(choose_lst)
+    print(information)
+    print(platform_)
     pass
