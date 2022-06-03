@@ -1,7 +1,7 @@
 
 import requests
 from bs4 import BeautifulSoup
-
+import re
 class AnigamerContent:
     def __init__(self,url:str) -> None:
         self.url = url
@@ -22,15 +22,14 @@ class AnigamerContent:
         e = len(supertitle)
         self.finallst['上架日期'] = time.text.split('：')[1]
         self.finallst['集數'] = str(max([int(i.text) for i in num]))
-        self.finallst['STAFF'] = supertitle + ' ' + supervisor.text[e:]
+        self.finallst['STAFF'] = supertitle + ':' + supervisor.text[e:]
         desciption = content[0].select('section.data > div.data_intro > p')
-        self.finallst['簡介'] = desciption[0].text.strip()
-        #print(self.finallst)
+        self.finallst['簡介'] = ' '.join(desciption[0].text.split())
         return self.finallst
 
 
 if __name__ == '__main__':
-    a = AnigamerContent('https://ani.gamer.com.tw/animeVideo.php?sn=926')
+    a = AnigamerContent('https://ani.gamer.com.tw/animeVideo.php?sn=12435')
     ans = a.CrawlContent()
     for i,j in ans.items():
         print(i,j)

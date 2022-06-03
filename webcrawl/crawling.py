@@ -5,13 +5,14 @@ import contentplatform.fricontent as fric
 #import contentplatform.kktvcontent as kktvc
 import contentplatform.linetvcontent as linec
 import contentplatform.myselfcontent as myc
-
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from fuzzywuzzy import fuzz
 from typing import Dict, List
 class Crawl:
     def __init__(self,search:str) -> None:
         
-        from selenium import webdriver
-        from selenium.webdriver.chrome.options import Options
+        
         option = Options()
         option.add_argument('--headless')
         self.driver = webdriver.Chrome('D:\crawler_final\webplatform\chromedriver.exe',options=option)
@@ -51,7 +52,7 @@ class Crawl:
         #anigamer
         choose_lst = list(self.anigamer.keys())
         #myself
-        from fuzzywuzzy import fuzz
+        
         for i in self.myself.keys():
             if i not in choose_lst:
                 for j in choose_lst:
@@ -113,7 +114,7 @@ class Crawl:
         #print(sorted(choose_lst))
         return choose_lst 
     
-    def platform(self,actualsearch:str)->Dict:
+    def CrawlContent(self,actualsearch:str)->Dict:
         for i in self.anigamer.keys():
             if i == actualsearch:
                 self.result_dict['巴哈姆特動畫瘋'] = self.anigamer[i]
@@ -152,10 +153,10 @@ class Crawl:
             if i == actualsearch:
                 self.result_dict['hami'] = self.hami[i]
                 break
-        return self.CrawInform()
+        return self.__CrawInform()
         #回傳結果 -> self.Information & self.CrawInform
     
-    def CrawInform(self):
+    def __CrawInform(self):
         if self.result_dict:
             for i,j in self.result_dict.items():
                 if i == '巴哈姆特動畫瘋' : return anc.AnigamerContent(j).CrawlContent() #anigamer
@@ -176,7 +177,7 @@ if __name__ == '__main__':
     print(sys.path)
     c = Crawl(input())
     c.Outputchoose()
-    y = c.platform('刀劍神域 Sword Art Online')
+    y = c.CrawlContent('刀劍神域 Sword Art Online')
     print(c.myself)
     print(y)
     url = ''

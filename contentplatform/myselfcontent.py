@@ -18,12 +18,14 @@ class MyselfContent:
         content = soup.select('#ct > div:nth-child(3) > div.info_box.fl > div > div.info_info')
         data = content[0].select('ul > li') #上架日期
         self.finallst['上架日期'] = data[1].text.split(':')[1].strip()
+        #print(data)
         x =data[2].text.split(':')[1]
         if x.strip() != '未知':
             self.finallst['集數'] = x[s:-e]
         else:
             self.finallst['集數'] = '未知'
-        self.finallst['STFF'] = data[3].text
+        self.finallst['STAFF'] = data[3].text
+        #print(data[3].text)
         self.finallst['簡介'] = content[0].select('#info_introduction > p')[0].text
         #print(self.finallst)
         return self.finallst
