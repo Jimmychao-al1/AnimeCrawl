@@ -37,7 +37,7 @@ def search():
     #option = ['刀劍神域 Alicization', '刀劍神域 Alicization War of Underworld', '刀劍神域 Alicization War of Underworld -THE LAST SEASON-', '刀劍神域 Alternative GGO', '刀劍神域 Extra Edition', '刀劍神域 Progressive', '刀劍神域 Sword Art Online', '刀劍神域 Sword Art Online 第二季', '刀劍神域 劇場版 序列爭戰', '刀劍神域 愛麗絲篇', '刀劍神域 特別篇 Extra Edition', '刀劍神域外傳 Gun Gale Online', '刀劍神域外傳GGO', '刀劍神域第1季', '刀劍神域：序列之爭']
     #select
     def select():
-        selection = lb.get(lb.curselection())
+        selection = var.get()
         #傳出所選選項-> selection
         for i in holder_list:
             i.destroy()
@@ -47,18 +47,18 @@ def search():
     #顯示選項
     n = 150
     var = StringVar()
-    var.set(option)
-    b1 = Button(win, text='selection', width=15, height=2, command=select, font = "Constantia 15",bg='papayawhip')
-    canvas1.create_window(325, n, window = b1)
-    b1.pack()
-    lb = Listbox(win, listvariable=var)
-    canvas1.create_window(325, n+40, window = lb)
-    lb.pack()
-    #for i in option:
-    #    bu = Radiobutton(win, text = i, variable = var, value = i, command = select)
-    #    n += 40
-    #    
-    #    holder_list.append(bu)
+    #var.set(option)
+    #b1 = Button(win, text='selection', width=15, height=2, command=select, font = "Constantia 15",bg='papayawhip')
+    #canvas1.create_window(325, n, window = b1)
+    #b1.pack()
+    #lb = Listbox(win, listvariable=var)
+    #canvas1.create_window(325, n+40, window = lb)
+    #lb.pack()
+    for i in option:
+        bu = Radiobutton(win, text = i, variable = var, value = i, command = select)
+        n += 40
+        canvas1.create_window(325, n, window = bu)
+        holder_list.append(bu)
 
 
 def callback(url):
@@ -92,7 +92,7 @@ def outp(c:Crawl,actualsearch:str):
     canvas1.create_text( 325,200,text = "_____簡介_____",font = tkFont.Font(family='Constantia',size=15,weight='bold'))
     canvas1.create_text( 325,290,text = "".join(intro), font = "Consolas 12")
     #staff
-    canvas1.create_text( 325,375,text = "_____staff_____",font = tkFont.Font(family='Constantia',size=15,weight='bold'))
+    canvas1.create_text( 325,375,text = "_____STAFF_____",font = tkFont.Font(family='Constantia',size=15,weight='bold'))
     n = 420
     word = 0
     for i in out2["STAFF"].split(","):
