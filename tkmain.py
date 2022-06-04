@@ -33,13 +33,13 @@ def search():
     canvas1.create_image( -50, -100, image = bgimg, anchor = "nw")
     showbtn = canvas1.create_window(560,100,window=btn)
 
-    #title
-    canvas1.create_text( 325,75, text = "動 畫 搜 尋\n",font = tkFont.Font(family='Constantia',size=25,weight='bold'))
-    #input box
-    canvas1.create_text( 100,100, text = "我想看...",font = tkFont.Font(family='Constantia',size=18,weight='bold'))
-    en = Entry(bd = 5, font = "Constantia 18") #輸入
-    canvas1.create_window( 325, 100, window = en, width = 300)
-    holder_list = []
+    ##title
+    #canvas1.create_text( 325,75, text = "動 畫 搜 尋\n",font = tkFont.Font(family='Constantia',size=25,weight='bold'))
+    ##input box
+    #canvas1.create_text( 100,100, text = "我想看...",font = tkFont.Font(family='Constantia',size=18,weight='bold'))
+    #en = Entry(bd = 5, font = "Constantia 18") #輸入
+    #canvas1.create_window( 325, 100, window = en, width = 300)
+    #holder_list = []
 
 
 
