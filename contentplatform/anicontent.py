@@ -19,16 +19,28 @@ class AnigamerContent:
         supervisor = base_data[0].select_one(' div.anime-option > ul > li:nth-child(3)')
         supertitle = supervisor.span.text
         e = len(supertitle)
-        self.finallst['上架日期'] = time.text.split('：')[1]
-        self.finallst['集數'] = str(max([int(i.text) for i in num]))
-        self.finallst['STAFF'] = supertitle + ':' + supervisor.text[e:]
+        try:
+            self.finallst['上架日期'] = time.text.split('：')[1]
+        except:
+            pass
+        try:
+            self.finallst['集數'] = str(max([int(i.text) for i in num if i.text.isdigit()]))
+        except:
+            pass
+        try:
+            self.finallst['STAFF'] = supertitle + ':' + supervisor.text[e:]
+        except:
+            pass
         desciption = content[0].select('section.data > div.data_intro > p')
-        self.finallst['簡介'] = ' '.join(desciption[0].text.split())
+        try:
+            self.finallst['簡介'] = ' '.join(desciption[0].text.split())
+        except:
+            pass
         return self.finallst
 
 
-if __name__ == '__main__':
-    a = AnigamerContent('https://ani.gamer.com.tw/animeVideo.php?sn=12435')
+if __name__ == '__main__':  
+    a = AnigamerContent('https://ani.gamer.com.tw/animeVideo.php?sn=10849')
     ans = a.CrawlContent()
     for i,j in ans.items():
         print(i,j)
