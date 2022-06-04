@@ -1,11 +1,10 @@
 
 import requests
 from bs4 import BeautifulSoup
-import re
 class AnigamerContent:
     def __init__(self,url:str) -> None:
         self.url = url
-        self.finallst = {'簡介':'','STAFF':'','上架日期':'','集數':''}
+        self.finallst = {'簡介':'','STAFF':'','上架日期':'','集數':''} #動畫詳細資訊
         self.headers = {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36'
 }
