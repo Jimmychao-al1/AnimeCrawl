@@ -19,7 +19,6 @@ class KuboSearch:
         r = requests.get(self.urlSearch,headers=self.headers)
         soup = BeautifulSoup(r.text,'html.parser')
         container = soup.find('div',{'class':'hl-rb-search hl-marg-right50 clearfix'}) #搜大框
-        #print(container)
 
         test1 = container.find_all('div',{'class':'hl-item-div'}) #爬結果
         if test1:
@@ -44,6 +43,7 @@ class KuboSearch:
 
             urls = [f'https://123kubo.tv/search/page/{i}/wd/{self.search}.html' for i in range(1, self.maxpage+1)]
 
+            #同步處理多網址爬蟲
             with concurrent.futures.ThreadPoolExecutor(max_workers=self.maxpage) as executor:
                 executor.map(self.crawlSub,urls)
             
@@ -65,12 +65,6 @@ class KuboSearch:
                     pass
         else:
             pass
-'''
-    def printrst(self) -> str:
-        for k,v in sorted(self.finallst.items(),key=lambda x : x[0]):
-            print(k+'\t'+v)
-    def getrst(self):
-        return sorted(self.finallst)'''
 if __name__ == '__main__':
     animeSearch = KuboSearch(input())
     animeSearch.crwalMain()
