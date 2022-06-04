@@ -15,6 +15,7 @@ class GrimySearch:
         r = requests.get(self.urlSearch)
         soup = BeautifulSoup(r.text,'html.parser')
         page = soup.select('#long-page > ul > li.hidden-xs')
+        #獲取最大分頁
         self.maxpage = max(int(i.text) for i in page)
         #crawl mainpage
         lst = soup.find_all('div',{'class':'details-info-min col-md-12 col-sm-12 col-xs-12 clearfix news-box-txt p-0'}) #result list
@@ -31,8 +32,10 @@ class GrimySearch:
         if self.maxpage >1:
             urls = [f'https://gimy.app/search/{self.search}----------{i}---.html' for i in range(2,self.maxpage+1)]
 
+            #建立多個執行緒，加速爬蟲多個網站的速度
             with concurrent.futures.ThreadPoolExecutor(max_workers=self.maxpage) as executor:
                 executor.map(self.GrimySub,urls)
+
         return dict(sorted(self.finallst.items()))
 
     def GrimySub(self,url : str):
