@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 class AnigamerSearch:
     def __init__(self,search:str) -> None:
         self.search = search
-        self.finallst = {}
+        self.finallst = {} #爬蟲結果
         self.headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36',
 }
@@ -27,6 +27,7 @@ class AnigamerSearch:
                 self.finallst[title] = href
         return dict(sorted(self.finallst.items()))
 
+    #爬redirect url
     def GetPostResult(self):
         r = requests.post('https://ani.gamer.com.tw/search.php',data=self.mydata,headers = self.headers,allow_redirects=False)
         return self.urlBae+str(r.headers.get('Location'))
