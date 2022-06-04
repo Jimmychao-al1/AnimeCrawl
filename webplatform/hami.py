@@ -35,12 +35,6 @@ class HamivideoSearch:
                 for a,b in zip(name_lst,link_lst):
                     if fuzz.partial_ratio(self.search.lower(),a.lower())>=70:
                         hamivideo_dict[a] = b
-        #最後輸出   
-    #    if hamivideo_lst == []:
-    #        print("無")
-    #    else:
-    #        for i in hamivideo_lst:
-    #            print(i)
         self.driver.close()
         return dict(sorted(hamivideo_dict.items()))
                 
