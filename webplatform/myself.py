@@ -7,7 +7,7 @@ import concurrent.futures
 class MyselfSearch:
     def __init__(self,search:str) -> None:
         self.search = search
-        self.finallst = {}
+        self.finallst = {} 
         self.maxpage = 0
         self.urlBase = 'https://myself-bbs.com/'
         self.urlSearch ='https://myself-bbs.com/search.php?mod=forum'
@@ -48,7 +48,7 @@ class MyselfSearch:
 
             start_time = time.time()
 
-            #同時建立及啟用10個執行緒
+            #同時建立及啟用多個執行緒，加速爬蟲速度
             with concurrent.futures.ThreadPoolExecutor(max_workers=self.maxpage) as executor:
                 executor.map(self.crawlSubpage,urls)
             end_time = time.time()
