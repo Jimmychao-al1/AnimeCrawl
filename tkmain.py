@@ -7,7 +7,7 @@ from ctypes import windll
 
 #建立主視窗
 win = Tk()
-windll.shcore.SetProcessDpiAwareness(2)# 2 -> 清晰 但是螢幕小 , 3->模糊 螢幕大
+windll.shcore.SetProcessDpiAwareness(3)# 2 -> 清晰 但是螢幕小 , 3->模糊 螢幕大
 win.title("動畫資訊")
 win.geometry("650x900+400+0") #大小:寬x高/視窗出現座標
 win.resizable(0,0) #不可縮放
@@ -24,10 +24,25 @@ canvas1.create_text( 100,100, text = "我想看...",font = tkFont.Font(family='C
 en = Entry(bd = 5, font = "Constantia 18") #輸入
 canvas1.create_window( 325, 100, window = en, width = 300)
 holder_list = []
-tag = False
+
 #search
 def search():
-    #刪除先前結果未處理
+    #刪除先前結果
+    canvas1.delete("all")
+    canvas1.pack(fill='both',expand=True)
+    canvas1.create_image( -50, -100, image = bgimg, anchor = "nw")
+    showbtn = canvas1.create_window(560,100,window=btn)
+
+    #title
+    canvas1.create_text( 325,75, text = "動 畫 搜 尋\n",font = tkFont.Font(family='Constantia',size=25,weight='bold'))
+    #input box
+    canvas1.create_text( 100,100, text = "我想看...",font = tkFont.Font(family='Constantia',size=18,weight='bold'))
+    en = Entry(bd = 5, font = "Constantia 18") #輸入
+    canvas1.create_window( 325, 100, window = en, width = 300)
+    holder_list = []
+
+
+
     inp = en.get()
     global c
     c = Crawl(inp)
@@ -47,15 +62,8 @@ def search():
     #顯示選項
     n = 150
     var = StringVar()
-    #var.set(option)
-    #b1 = Button(win, text='selection', width=15, height=2, command=select, font = "Constantia 15",bg='papayawhip')
-    #canvas1.create_window(325, n, window = b1)
-    #b1.pack()
-    #lb = Listbox(win, listvariable=var)
-    #canvas1.create_window(325, n+40, window = lb)
-    #lb.pack()
     for i in option:
-        bu = Radiobutton(win, text = i, variable = var, value = i, command = select)
+        bu = Radiobutton(win, text = i, variable = var, value = i, command = select,font = "Consolas 15")
         n += 40
         canvas1.create_window(325, n, window = bu)
         holder_list.append(bu)
@@ -97,13 +105,13 @@ def outp(c:Crawl,actualsearch:str):
     word = 0
     for i in out2["STAFF"].split(","):
         if word == 0:
-            canvas1.create_text( 150,n,text = i,font = tkFont.Font(family='Candara',size=14,weight='bold'))
+            canvas1.create_text( 150,n,text = i,font = tkFont.Font(family='Candara',size=13,weight='bold'))
             word += 1
         elif word == 1:
-            canvas1.create_text( 350,n,text = i,font = tkFont.Font(family='Candara',size=14,weight='bold'))
+            canvas1.create_text( 350,n,text = i,font = tkFont.Font(family='Candara',size=13,weight='bold'))
             word += 1
         elif word == 2:
-            canvas1.create_text( 550,n,text = i,font = tkFont.Font(family='Candara',size=14,weight='bold'))
+            canvas1.create_text( 550,n,text = i,font = tkFont.Font(family='Candara',size=13,weight='bold'))
             word = 0
             n += 30
     n += 30
