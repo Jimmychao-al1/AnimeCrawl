@@ -47,7 +47,8 @@ class Crawl:
         time.sleep(0.5)
         self.hami = hami.HamivideoSearch(self.search,self.driver).Hamivideocrawl()
 
-    #將各個平台的爬蟲結果(只針對動畫名稱)進行整理 以供使用者選擇準確動畫名稱
+    #將各個平台的爬蟲結果(只針對動畫名稱)進行整理
+    #以供使用者選擇準確動畫名稱
     def Outputchoose(self):
         self.__CrawlAll()
         choose_lst = list(self.anigamer.keys())
